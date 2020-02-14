@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class DigitalHouseManager {
 
-    private List<Aluno> listaAluno;
-    private List<Professor> listaProfessor;
-    private List<Curso> listaCurso;
-    private List <Matricula> listaMatricula;
+    private List<Aluno> listaAluno = new ArrayList<>();
+    private List<Professor> listaProfessor = new ArrayList<>();
+    private List<Curso> listaCurso = new ArrayList<>();
+    private List <Matricula> listaMatricula = new ArrayList<>();
 
 
     public DigitalHouseManager() {
@@ -18,6 +19,93 @@ public class DigitalHouseManager {
         this.listaMatricula = listaMatricula;
     }
 
+
+    public void registrarCurso(String nome, Integer codigoCurso,Integer quantidadeMaximaDeAlunos) {
+
+        Curso curso = new Curso(nome,codigoCurso,quantidadeMaximaDeAlunos);
+        listaCurso.add(curso);
+    }
+
+
+    public void excluirCurso(Integer codigoCurso) {
+        for (Curso curso : listaCurso) {
+            if (curso.equals(codigoCurso)) {
+                listaCurso.remove(curso);
+                System.out.println("Curso removido!");
+            } else {
+                System.out.println("Código não encontrado");
+            }
+        }
+    }
+
+
+    public void registrarProfessorAdjunto(String nome, String sobrenome, Integer codigoProfessor, Integer quantidadeDeHoras) {
+        ProfessorAdjunto professoradjunto = new ProfessorAdjunto(nome, sobrenome, 0, codigoProfessor, quantidadeDeHoras);
+        listaProfessor.add(professoradjunto);
+        System.out.println("Professor " + professoradjunto.getNome() + " registrado!");
+    }
+
+    public void registrarProfessorTitular (String nome, String sobrenome, Integer codigoProfessor, String especialidade) {
+        ProfessorTitular professortitular = new ProfessorTitular(nome, sobrenome, 0, codigoProfessor, especialidade);
+        listaProfessor.add(professortitular);
+        System.out.println("Professor " + professortitular.getNome() + " registrado!");
+    }
+
+
+    public void excluirProfessor(Integer codigoProfessor) {
+        for (Professor professor : listaProfessor) {
+            if (professor.equals(codigoProfessor)) {
+                listaProfessor.remove(professor);
+                System.out.println("Professor excluido!");
+            } else {
+                System.out.println("Professor não encontrado!");
+            }
+        }
+    }
+
+
+    public void matricularAluno(String nome, String sobrenome,Integer codigoAluno) {
+        Aluno aluno = new Aluno(nome, sobrenome, codigoAluno);
+        listaAluno.add(aluno);
+        System.out.println("Aluno " + aluno.getNome() + " criado!");
+    }
+
+    public void matricularAluno(Integer codigoAluno, Integer codigoCurso) {
+        for (Aluno aluno : listaAluno) {
+            if (aluno.getCodigoAluno() == codigoAluno) {
+                for (Curso curso : listaCurso) {
+                    if (curso.getCodigoCurso() == codigoCurso) {
+                        if (curso.adicionarUmAluno(aluno)) {
+                            Matricula matricula = new Matricula(aluno, curso);
+                            listaMatricula.add(matricula);
+                            System.out.println("Matricula realizada para o aluno: " + aluno.getNome());
+                        } else {
+                            System.out.println("Não há vagas para o aluno: " + aluno.getNome());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public void alocarProfessores(Integer codigoCurso, Integer codigoProfessorTitular, Integer codigoProfessorAdjunto) {
+        for (Curso curso : listaCurso) {
+            if (curso.getCodigoCurso() == codigoCurso) {
+                for (Professor professor : listaProfessor) {
+
+                    if (professor.getCodigoProfessor() == codigoProfessorAdjunto) {
+                        curso.setProfessorAdjunto(professor);
+                        System.out.println("Professor Adicionado!");
+                    }
+                    else if (professor.getCodigoProfessor() == codigoProfessorTitular) {
+                        curso.setProfessorTitular(professor);
+                        System.out.println("Professor Adicionado!");
+                    }
+                }
+            }
+        }
+    }
 
     public List<Aluno> getListaAluno() {
         return listaAluno;

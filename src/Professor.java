@@ -26,6 +26,15 @@ public class Professor {
         return codigoProfessor == professor.codigoProfessor;
     }
 
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", tempoDeCasa=" + tempoDeCasa +
+                ", codigoProfessor=" + codigoProfessor +
+                '}';
+    }
 
     public String getNome() {
         return nome;

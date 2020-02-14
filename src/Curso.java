@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -5,10 +6,10 @@ public class Curso {
 
     private String nome;
     private int codigoCurso;
-    private ProfessorAdjunto professorAdjunto;
-    private  ProfessorTitular professorTitular;
+    private Professor professorAdjunto;
+    private  Professor professorTitular;
     private int quantidadeMaxAlunos;
-    private List<Aluno> listaAlunos;
+    private List<Aluno> listaAlunos = new ArrayList<>();
 
 
     public Curso(){
@@ -23,6 +24,11 @@ public class Curso {
         this.listaAlunos = listaAlunos;
     }
 
+    public Curso(String nome, int codigoCurso, int quantidadeMaxAlunos) {
+        this.nome = nome;
+        this.codigoCurso = codigoCurso;
+        this.quantidadeMaxAlunos = quantidadeMaxAlunos;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -32,6 +38,17 @@ public class Curso {
         return codigoCurso == curso.codigoCurso;
     }
 
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "nome='" + nome + '\'' +
+                ", codigoCurso=" + codigoCurso +
+                ", professorAdjunto=" + professorAdjunto +
+                ", professorTitular=" + professorTitular +
+                ", quantidadeMaxAlunos=" + quantidadeMaxAlunos +
+                ", listaAlunos=" + listaAlunos +
+                '}';
+    }
 
     public Boolean adicionarUmAluno(Aluno umAluno) {
         if (listaAlunos.size() < quantidadeMaxAlunos) {
@@ -44,7 +61,15 @@ public class Curso {
 
 
     public void excluirAluno(Aluno umAluno) {
-        listaAlunos.remove(umAluno);
+        for (Aluno aluno : listaAlunos) {
+            if (aluno.equals(umAluno)) {
+                listaAlunos.remove(aluno);
+                System.out.println("Aluno removido!");
+            } else {
+                System.out.println("Aluno não encontrado!");
+            }
+
+        }
     }
 
 
@@ -65,18 +90,18 @@ public class Curso {
     }
 
     public ProfessorAdjunto getProfessorAdjunto() {
-        return professorAdjunto;
+        return (ProfessorAdjunto) professorAdjunto;
     }
 
-    public void setProfessorAdjunto(ProfessorAdjunto professorAdjunto) {
+    public void setProfessorAdjunto(Professor professorAdjunto) {
         this.professorAdjunto = professorAdjunto;
     }
 
     public ProfessorTitular getProfessorTitular() {
-        return professorTitular;
+        return (ProfessorTitular) professorTitular;
     }
 
-    public void setProfessorTitular(ProfessorTitular professorTitular) {
+    public void setProfessorTitular(Professor professorTitular) {
         this.professorTitular = professorTitular;
     }
 

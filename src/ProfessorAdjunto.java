@@ -14,6 +14,7 @@ public class ProfessorAdjunto extends Professor {
     }
 
 
+
     public int getHorasDeMonitoria() {
         return horasDeMonitoria;
     }

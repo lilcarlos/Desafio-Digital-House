@@ -13,6 +13,9 @@ public class ProfessorTitular extends Professor {
         this.especialidade = especialidade;
     }
 
+
+
+
     public String getEspecialidade() {
         return especialidade;
     }
