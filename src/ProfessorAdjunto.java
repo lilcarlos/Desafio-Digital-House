@@ -7,6 +7,7 @@ public class ProfessorAdjunto extends Professor {
 
     }
 
+
     public ProfessorAdjunto(String nome, String sobrenome, int tempoDeCasa, int codigoProfessor, int horasDeMonitoria) {
         super(nome, sobrenome, tempoDeCasa, codigoProfessor);
         this.horasDeMonitoria = horasDeMonitoria;
