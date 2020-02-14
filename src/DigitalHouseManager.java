@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class DigitalHouseManager {
@@ -6,7 +7,7 @@ public class DigitalHouseManager {
     private List<Aluno> listaAluno = new ArrayList<>();
     private List<Professor> listaProfessor = new ArrayList<>();
     private List<Curso> listaCurso = new ArrayList<>();
-    private List <Matricula> listaMatricula = new ArrayList<>();
+    private List<Matricula> listaMatricula = new ArrayList<>();
 
 
     public DigitalHouseManager() {
@@ -20,22 +21,38 @@ public class DigitalHouseManager {
     }
 
 
-    public void registrarCurso(String nome, Integer codigoCurso,Integer quantidadeMaximaDeAlunos) {
-
-        Curso curso = new Curso(nome,codigoCurso,quantidadeMaximaDeAlunos);
-        listaCurso.add(curso);
+    public void registrarCurso(String nome, Integer codigoCurso, Integer quantidadeMaximaDeAlunos) {
+        int contador = 0;
+        Curso curso = new Curso(nome, codigoCurso, quantidadeMaximaDeAlunos);
+        for (Curso curso1 : listaCurso) {
+            if (curso1.getCodigoCurso() == codigoCurso) {
+                contador += 1;
+            }
+        }
+        if (contador == 0){
+            listaCurso.add(curso);
+            System.out.println("Curso adicionado!");
+        } else {
+            System.out.println("Curso nao adicionado!");
+        }
     }
 
 
+
+
+
     public void excluirCurso(Integer codigoCurso) {
-        for (Curso curso : listaCurso) {
-            if (curso.equals(codigoCurso)) {
-                listaCurso.remove(curso);
-                System.out.println("Curso removido!");
-            } else {
-                System.out.println("Código não encontrado");
+
+        try {
+            for (Curso curso : listaCurso) {
+                if (curso.getCodigoCurso() == codigoCurso) {
+                    listaCurso.remove(curso);
+                    System.out.println("Curso removido!");
+                } else {
+                    System.out.println("Código não encontrado");
+                }
             }
-        }
+        } catch (ConcurrentModificationException e) {}
     }
 
 
@@ -54,11 +71,9 @@ public class DigitalHouseManager {
 
     public void excluirProfessor(Integer codigoProfessor) {
         for (Professor professor : listaProfessor) {
-            if (professor.equals(codigoProfessor)) {
+            if (professor.getCodigoProfessor() == codigoProfessor) {
                 listaProfessor.remove(professor);
                 System.out.println("Professor excluido!");
-            } else {
-                System.out.println("Professor não encontrado!");
             }
         }
     }
@@ -96,7 +111,7 @@ public class DigitalHouseManager {
 
                     if (professor.getCodigoProfessor() == codigoProfessorAdjunto) {
                         curso.setProfessorAdjunto(professor);
-                        System.out.println("Professor Adicionado!");
+                        System.out.println("Professor " + professor.getNome() +" Adicionado!");
                     }
                     else if (professor.getCodigoProfessor() == codigoProfessorTitular) {
                         curso.setProfessorTitular(professor);

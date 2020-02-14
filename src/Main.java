@@ -13,18 +13,16 @@ public class Main {
 
 
         digital.registrarCurso("Full Stack", 20001, 2);
+        digital.registrarCurso("Full Stack", 20001, 2);
+        digital.registrarCurso("Android", 20002, 2);
+
+        System.out.println(digital.getListaCurso());
 
 
-        digital.alocarProfessores(20001,321,123);
-
-        digital.matricularAluno("Kawe","Santos",666);
-        digital.matricularAluno("Fabio","Pereira", 222);
-        digital.matricularAluno("Vini","Fonc",333);
 
 
-        digital.matricularAluno(666,20001);
-        digital.matricularAluno(222,20001);
-        digital.matricularAluno(333,20001);
+
+
 
 
 
