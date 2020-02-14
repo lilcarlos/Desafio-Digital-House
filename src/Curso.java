@@ -33,6 +33,21 @@ public class Curso {
     }
 
 
+    public Boolean adicionarUmAluno(Aluno umAluno) {
+        if (listaAlunos.size() < quantidadeMaxAlunos) {
+            listaAlunos.add(umAluno);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public void excluirAluno(Aluno umAluno) {
+        listaAlunos.remove(umAluno);
+    }
+
+
     public String getNome() {
         return nome;
     }
