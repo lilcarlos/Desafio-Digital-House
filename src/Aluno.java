@@ -6,6 +6,10 @@ public class Aluno {
     private String sobrenome;
     private  int codigoAluno;
 
+    public Aluno(){
+
+    }
+
     public Aluno(String nome, String sobrenome, int codigoAluno) {
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -20,5 +24,34 @@ public class Aluno {
         Aluno aluno = (Aluno) o;
         return codigoAluno == aluno.codigoAluno;
     }
-    
+
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(codigoAluno);
+//    }
+
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public int getCodigoAluno() {
+        return codigoAluno;
+    }
+
+    public void setCodigoAluno(int codigoAluno) {
+        this.codigoAluno = codigoAluno;
+    }
 }
